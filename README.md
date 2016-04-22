@@ -1,4 +1,4 @@
 ## rust-libtlrw
-TLRW algorithm implementation for the Rust programming language
-*Under construction*
+TLRW algorithm implementation for the Rust programming language <br />
+*Under construction* <br />
 :dolls:
