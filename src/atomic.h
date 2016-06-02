@@ -15,11 +15,11 @@
  */
  
 void cpu_stall(void) {
-	__asm__ __volatile__("pause" ::: "memory");
+    __asm__ __volatile__("pause" ::: "memory");
 }
 
 void memory_barrier(void) {
-	__asm__ __volatile__("" ::: "memory");
+    __asm__ __volatile__("" ::: "memory");
 }
 
 /*

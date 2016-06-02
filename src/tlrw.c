@@ -44,7 +44,7 @@ void tlrw_bytelock_write_lock(struct TLRWByteLock *bytelock, int32_t slot) {
      */
     
     while(!cas_u32(&bytelock->owner, 0, slot))
-		cpu_stall();
+        cpu_stall();
     
     /*
      * If we are slotted and we were reading something here,
@@ -62,10 +62,10 @@ void tlrw_bytelock_write_lock(struct TLRWByteLock *bytelock, int32_t slot) {
     uint32_t i;
     for (i = 0; i < sizeof(bytelock->byte_array); ++i)
         while (load_u8(&bytelock->byte_array[i]))
-			cpu_stall();
+            cpu_stall();
     
     while (load_u32(&bytelock->read_counter))
-		cpu_stall();
+        cpu_stall();
     
     return;
 }
@@ -110,7 +110,7 @@ void tlrw_bytelock_read_lock(struct TLRWByteLock *bytelock, uint32_t slot) {
                 break;
             dec_u32(&bytelock->read_counter);
             while (load_u32(&bytelock->owner))
-				cpu_stall();
+                cpu_stall();
         }
         return;
     }
@@ -125,7 +125,7 @@ void tlrw_bytelock_read_lock(struct TLRWByteLock *bytelock, uint32_t slot) {
             break;
         store_u8(&bytelock->byte_array[slot - 1], 0);
         while (load_u32(&bytelock->owner))
-			cpu_stall();
+            cpu_stall();
     }
     
     return;
